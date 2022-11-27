@@ -34,7 +34,8 @@ namespace Machine_Learning
             {
                 for (var j = 0; j < Columns; j++)
                 {
-                    Data[i, j] = func(Data[i, j]);
+                    var value  = Data[i, j];
+                    Data[i, j] = func(value);
                 }
             }
         }
@@ -47,7 +48,8 @@ namespace Machine_Learning
             {
                 for (var j = 0; j < output.Columns; j++)
                 {
-                    output.Data[i, j] = func(input.Data[i, j]);
+                    var value = input.Data[i, j];
+                    output.Data[i, j] = func(value);
                 }
             }
 

@@ -4,6 +4,13 @@ namespace Machine_Learning
 {
     public class Evolution
     {
+        private static double _standardDeviation = 0.001;
+
+        public static void SetStandardDeviation(double standardDeviation)
+        {
+            _standardDeviation = standardDeviation;
+        }
+
         public static NeuralNetwork Crossover(NeuralNetwork networkA, NeuralNetwork networkB)
         {
             throw new NotImplementedException();
@@ -13,13 +20,15 @@ namespace Machine_Learning
         {
             if (mutationRate < 0 || mutationRate > 1) throw new ArgumentOutOfRangeException();
 
+            var rng = new Random();
+
             // Mutate weights.
-            neuralNetwork.WeightsInputToHidden.Map((value) => new Random().NextDouble() <= mutationRate ? GaussianRandom(0, 0.001) : value);
-            neuralNetwork.WeightsHiddenToOutput.Map((value) => new Random().NextDouble() <= mutationRate ? GaussianRandom(0, 0.001) : value);
+            neuralNetwork.WeightsInputToHidden.Map(value => rng.NextDouble() <= mutationRate ? value + GaussianRandom(0, _standardDeviation) : value);
+            neuralNetwork.WeightsHiddenToOutput.Map(value => rng.NextDouble() <= mutationRate ? value + GaussianRandom(0, _standardDeviation) : value);
 
             // Mutate bias.
-            neuralNetwork.BiasHidden.Map((value) => new Random().NextDouble() <= mutationRate ? GaussianRandom(0, 0.001) : value);
-            neuralNetwork.BiasOutput.Map((value) => new Random().NextDouble() <= mutationRate ? GaussianRandom(0, 0.001) : value);
+            neuralNetwork.BiasHidden.Map(value => rng.NextDouble() <= mutationRate ? value + GaussianRandom(0, _standardDeviation) : value);
+            neuralNetwork.BiasOutput.Map(value => rng.NextDouble() <= mutationRate ? value + GaussianRandom(0, _standardDeviation) : value);
         }
 
         private static double GaussianRandom(double mean, double stdDev)
