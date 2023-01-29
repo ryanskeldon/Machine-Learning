@@ -44,9 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evolution.cs" />
-    <Compile Include="Matrix.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="NeuralNetwork.cs" />
+    <Compile Include="Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
